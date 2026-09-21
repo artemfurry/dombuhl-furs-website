@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dombühl Furs - Teil der Frankenfurs Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#d32f2f',
+                        brandRedDark: '#b71c1c',
+                        darkBg: '#121212',
+                        cardBg: '#1a1a1a',
+                        innerBg: '#161616',
+                        outerBg: '#1f1f1f',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1f1f1f;
+            color: #e0e0e0;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d32f2f;
+        }
+    </style>
+    <script>
+  (function() {
+    if (window.location.hostname.includes("duckdns.org")) return;
+
+    const PRIMARY_SERVER = "https://dombuhl-furs.duckdns.org";
+
+    // Проверяем доступность домашнего сервера
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 сек таймаут
+
+    fetch(PRIMARY_SERVER, { mode: 'no-cors', signal: controller.signal })
+      .then(() => {
+        clearTimeout(timeoutId);
+        window.location.href = PRIMARY_SERVER + "/";
+      })
+      .catch(() => {
+        console.log("Der Heimserver ist nicht verfügbar, es wird ein Netlify-Mirror geladen.");
+      });
+  })();
+</script>
+</head>
+<body class="bg-outerBg min-h-screen flex flex-col items-center justify-between antialiased">
+
+    <!-- MAIN CONTAINER -->
+    <div class="w-full max-w-[1100px] bg-darkBg shadow-2xl flex flex-col min-h-screen border-x border-neutral-800/40">
+
+        <!-- HEADER -->
+        <header class="relative bg-cardBg border-b border-neutral-800 px-4 md:px-8 py-3 flex flex-col md:flex-row items-center justify-between z-20">
+            <!-- PNG Logo Block -->
+            <div class="flex items-center space-x-3 mb-3 md:mb-0">
+                <a href="#" class="block group">
+                    <div class="bg-white p-1 rounded-sm shadow-md flex items-center justify-center transition transform group-hover:scale-105">
+                        <img src="dombühl_furs.png" width="120" height="60" alt="Dombühl Furs Logo" class="block object-contain">
+                    </div>
+                </a>
+            </div>
+
+            <!-- Top Navigation Menu -->
+            <nav>
+                <ul class="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-bold tracking-wider text-neutral-300 uppercase">
+                    <li><a href="#" class="text-white hover:text-brandRed transition-colors py-1 border-b-2 border-brandRed">Home</a></li>
+                    <li><a href="#über-uns" class="hover:text-brandRed transition-colors py-1 border-b-2 border-transparent hover:border-brandRed">Über Uns</a></li>
+                    <li><a href="#events" class="hover:text-brandRed transition-colors py-1 border-b-2 border-transparent hover:border-brandRed">Events</a></li>
+                    <li><a href="https://t.me/+DAKiITeByuw4YjUy" target="_blank" rel="noopener noreferrer" class="hover:text-brandRed transition-colors py-1 border-b-2 border-transparent hover:border-brandRed">Telegram</a></li>
+                    <li><a href="#" class="hover:text-brandRed transition-colors py-1 border-b-2 border-transparent hover:border-brandRed">Impressum</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-grow p-4 sm:p-8 space-y-8">
+
+            <!-- HERO INTRO BANNER -->
+            <section class="bg-gradient-to-r from-innerBg via-cardBg to-innerBg p-6 sm:p-8 rounded-lg border border-neutral-800 text-center space-y-4">
+                <div class="inline-block bg-brandRed/10 text-brandRed border border-brandRed/20 px-3 py-1 rounded-full text-xs font-semibold">
+                    📍 Dombühl & Hohenlohe-Franken • Ein Teil von Frankenfurs
+                </div>
+                
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    Willkommen bei den <span class="text-brandRed">Dombühl Furs</span>!
+                </h1>
+
+                <p class="max-w-2xl mx-auto text-sm sm:text-base text-neutral-300 leading-relaxed">
+                    Wir sind eine lokale Gruppe und ein Teil der <strong class="text-white">Frankenfurs</strong>-Community für Fursuiter, Künstler und Fans der anthropomorphen Kunst in Dombühl und der Region Hohenlohe-Franken.
+                </p>
+            </section>
+
+            <!-- SECTION 1: WER WIR SIND -->
+            <section id="über-uns" class="space-y-4 bg-innerBg p-5 sm:p-6 rounded-lg border border-neutral-800">
+                <h2 class="text-xl font-bold text-brandRed border-b border-neutral-800 pb-2">
+                    👥 Wer wir sind
+                </h2>
+                <div class="space-y-3 text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                    <p>
+                        Die <strong class="text-white">Dombühl Furs</strong> sind als Teil der <strong class="text-white">Frankenfurs</strong> ein regionaler Treffpunkt für Gleichgesinnte aus Dombühl und Umgebung. Egal ob du schon seit Jahren einen Fursuit besitzt, gerne zeichnest, Geschichten schreibst oder einfach neugierig bist und neue Leute kennenlernen möchtest — bei uns ist jeder herzlich willkommen!
+                    </p>
+                    <p>
+                        Unser Ziel ist es, einen entspannten und freundlichen Ort für die lokale Szene zu bieten, Ausflüge zu organisieren und das Furry-Hobby in Franken gemeinsam zu erleben.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 2: WAS WIR MACHEN (Cards) -->
+            <section class="space-y-4">
+                <h2 class="text-xl font-bold text-brandRed border-b border-neutral-800 pb-2">
+                    ⭐ Was dich bei uns erwartet
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Card 1 -->
+                    <div class="bg-cardBg p-4 rounded border border-neutral-800 space-y-2 hover:border-brandRed/50 transition-colors">
+                        <div class="text-brandRed text-xl font-bold">🐾 Fursuitwalks & Outings</div>
+                        <p class="text-xs text-neutral-400 leading-relaxed">
+                            Gemeinsame Spaziergänge und kleine Events in Dombühl und Umgebung – mit oder ohne Suit!
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-cardBg p-4 rounded border border-neutral-800 space-y-2 hover:border-brandRed/50 transition-colors">
+                        <div class="text-brandRed text-xl font-bold">💬 Stammtische & Treffen</div>
+                        <p class="text-xs text-neutral-400 leading-relaxed">
+                            Gemütliche Runden zum Quatschen, Austauschen und Pläne schmieden.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-cardBg p-4 rounded border border-neutral-800 space-y-2 hover:border-brandRed/50 transition-colors">
+                        <div class="text-brandRed text-xl font-bold">❤️ Frankenfurs Anbindung</div>
+                        <p class="text-xs text-neutral-400 leading-relaxed">
+                            Als Teil der Frankenfurs-Community sind wir bestens in der Region vernetzt.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: EVENTS & MITMACHEN -->
+            <section id="events" class="space-y-3 bg-innerBg p-5 sm:p-6 rounded-lg border border-neutral-800">
+                <h2 class="text-xl font-bold text-brandRed">
+                    📅 Nächste Treffen & Informationen
+                </h2>
+                <p class="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                    Wir befinden uns aktuell im Aufbau und planen die nächsten gemeinsamen Aktivitäten. Schau regelmäßig hier vorbei oder trete unserer Telegram-Gruppe bei, um keine Ankündigungen zu verpassen!
+                </p>
+                <div class="pt-2 flex flex-wrap gap-3">
+                    <a href="https://t.me/+DAKiITeByuw4YjUy" target="_blank" rel="noopener noreferrer" class="bg-brandRed hover:bg-brandRedDark text-white text-xs font-bold px-4 py-2 rounded transition-colors inline-block shadow-md">
+                        📢 Telegram Gruppe beitreten
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-brandRed text-white py-4 px-4 sm:px-8 mt-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
+                
+                <!-- Left Nav Links -->
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hover:underline opacity-90 hover:opacity-100">Home</a>
+                    <span>|</span>
+                    <a href="#über-uns" class="hover:underline opacity-90 hover:opacity-100">Über Uns</a>
+                    <span>|</span>
+                    <a href="#events" class="hover:underline opacity-90 hover:opacity-100">Events</a>
+                    <span>|</span>
+                    <a href="https://t.me/+DAKiITeByuw4YjUy" target="_blank" rel="noopener noreferrer" class="hover:underline opacity-90 hover:opacity-100">Telegram</a>
+                </div>
+
+                <!-- Center Copyright -->
+                <div>
+                    &copy; Dombühl Furs • Ein Teil von Frankenfurs
+                </div>
+
+                <!-- Right Legal Links -->
+                <div class="flex items-center space-x-2">
+                    <a href="#" class="hover:underline opacity-90 hover:opacity-100">Impressum</a>
+                    <span>|</span>
+                    <a href="#" class="hover:underline opacity-90 hover:opacity-100">Datenschutz</a>
+                </div>
+
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
