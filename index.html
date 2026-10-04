@@ -47,24 +47,24 @@
         }
     </style>
     <script>
-  (function() {
-    if (window.location.hostname.includes("duckdns.org")) return;
+      (function() {
+        if (window.location.hostname.includes("duckdns.org")) return;
 
-    const PRIMARY_SERVER = "https://dombuhl-furs.duckdns.org";
+        const PRIMARY_SERVER = "https://dombuhl-furs.duckdns.org";
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
 
-    fetch(PRIMARY_SERVER, { mode: 'no-cors', signal: controller.signal })
-      .then(() => {
-        clearTimeout(timeoutId);
-        window.location.href = PRIMARY_SERVER + "/";
-      })
-      .catch(() => {
-        console.log("Der Heimserver ist nicht verfügbar, es wird ein Netlify-Mirror geladen.");
-      });
-  })();
-</script>
+        fetch(PRIMARY_SERVER, { mode: 'no-cors', signal: controller.signal })
+          .then(() => {
+            clearTimeout(timeoutId);
+            window.location.href = PRIMARY_SERVER + "/";
+          })
+          .catch(() => {
+            console.log("Der Heimserver ist nicht verfügbar, es wird ein Netlify-Mirror geladen.");
+          });
+      })();
+    </script>
 </head>
 <body class="bg-outerBg min-h-screen flex flex-col items-center justify-between antialiased">
 
@@ -77,7 +77,7 @@
             <div class="flex items-center space-x-3 mb-3 md:mb-0">
                 <a href="#" class="block group">
                     <div class="bg-white p-1 rounded-sm shadow-md flex items-center justify-center transition transform group-hover:scale-105">
-                        <img src="dombühl_furs.png" width="120" height="60" alt="Dombühl Furs Logo" class="block object-contain">
+                        <img src="dombühl_furs.png" alt="Dombühl Furs Logo" class="w-28 h-auto object-contain">
                     </div>
                 </a>
             </div>
@@ -191,7 +191,7 @@
 
         <!-- GOOGLE FORM IFRAME -->
         <div class="flex justify-center p-4">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdi9_xkBG_SEJW_c5UZkJKn_r1VOwwhPi42Hj268b6byZlWmQ/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0" class="rounded border border-neutral-800 max-w-full">Wird geladen…</iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdi9_xkBG_SEJW_c5UZkJKn_r1VOwwhPi42Hj268b6byZlWmQ/viewform?embedded=true" width="500" height="500" class="rounded border border-neutral-800 max-w-full border-0">Wird geladen…</iframe>
         </div>
 
         <!-- FOOTER -->
@@ -232,11 +232,14 @@
         const localPostcodes = ['91601', '91555', '91522', '91541'];
 
         fetch('https://ipapi.co/json/')
-          .then(res => res.json())
+          .then(res => {
+            if (!res.ok) throw new Error("Network response error");
+            return res.json();
+          })
           .then(data => {
             const city = data.city || '';
             const postal = data.postal || '';
-            const region = data.region_code || ''; // BY = Bavaria
+            const region = data.region_code || '';
 
             const visitorText = document.getElementById('visitor-text');
             const visitorTag = document.getElementById('visitor-tag');
