@@ -112,6 +112,18 @@
                 </p>
             </section>
 
+            <!-- LOCAL VISITOR BADGE BLOCK -->
+            <section class="bg-cardBg p-4 rounded-lg border border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🐾</span>
+                    <div>
+                        <div class="text-xs text-neutral-400 font-semibold uppercase tracking-wider">Besucher-Status</div>
+                        <div id="visitor-text" class="text-sm font-bold text-white">Standort wird geprüft...</div>
+                    </div>
+                </div>
+                <div id="visitor-tag" class="hidden px-3 py-1 rounded text-xs font-bold uppercase tracking-wider"></div>
+            </section>
+
             <!-- SECTION 1: WER WIR SIND -->
             <section id="über-uns" class="space-y-4 bg-innerBg p-5 sm:p-6 rounded-lg border border-neutral-800">
                 <h2 class="text-xl font-bold text-brandRed border-b border-neutral-800 pb-2">
@@ -176,8 +188,13 @@
             </section>
 
         </main>
+
+        <!-- GOOGLE FORM IFRAME -->
+        <div class="flex justify-center p-4">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdi9_xkBG_SEJW_c5UZkJKn_r1VOwwhPi42Hj268b6byZlWmQ/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0" class="rounded border border-neutral-800 max-w-full">Wird geladen…</iframe>
+        </div>
+
         <!-- FOOTER -->
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdi9_xkBG_SEJW_c5UZkJKn_r1VOwwhPi42Hj268b6byZlWmQ/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0">Wird geladen…</iframe>
         <footer class="bg-brandRed text-white py-4 px-4 sm:px-8 mt-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium">
                 
@@ -208,5 +225,39 @@
 
     </div>
 
+    <!-- SCRIPT FOR LOCAL REGION DETECTION -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const localCities = ['Dombühl', 'Ansbach', 'Feuchtwangen', 'Dinkelsbühl', 'Nuremberg', 'Nürnberg', 'Rothenburg ob der Tauber'];
+        const localPostcodes = ['91601', '91555', '91522', '91541'];
+
+        fetch('https://ipapi.co/json/')
+          .then(res => res.json())
+          .then(data => {
+            const city = data.city || '';
+            const postal = data.postal || '';
+            const region = data.region_code || ''; // e.g. BY for Bavaria
+
+            const visitorText = document.getElementById('visitor-text');
+            const visitorTag = document.getElementById('visitor-tag');
+
+            const isLocal = localPostcodes.includes(postal) || localCities.includes(city) || region === 'BY';
+
+            if (isLocal) {
+              visitorText.innerText = `Hallo Nachbar aus ${city || 'Franken'}! Nice, dass du hier bist.`;
+              visitorTag.innerText = "Einheimischer / Region Franken";
+              visitorTag.className = "px-3 py-1 rounded text-xs font-bold uppercase tracking-wider bg-emerald-900/40 text-emerald-400 border border-emerald-500/30";
+            } else {
+              visitorText.innerText = `Willkommen! Besucher aus ${city || 'der Welt'}.`;
+              visitorTag.innerText = "Auswärtiger Besucher";
+              visitorTag.className = "px-3 py-1 rounded text-xs font-bold uppercase tracking-wider bg-blue-900/40 text-blue-400 border border-blue-500/30";
+            }
+            visitorTag.classList.remove('hidden');
+          })
+          .catch(() => {
+            document.getElementById('visitor-text').innerText = "Willkommen bei den Dombühl Furs!";
+          });
+      });
+    </script>
 </body>
 </html>
