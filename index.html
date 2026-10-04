@@ -224,40 +224,5 @@
         </footer>
 
     </div>
-
-    <!-- SCRIPT FOR LOCAL REGION DETECTION -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const localCities = ['Dombühl', 'Ansbach', 'Feuchtwangen', 'Dinkelsbühl', 'Nuremberg', 'Nürnberg', 'Rothenburg ob der Tauber'];
-        const localPostcodes = ['91601', '91555', '91522', '91541'];
-
-        fetch('https://ipapi.co/json/')
-          .then(res => res.json())
-          .then(data => {
-            const city = data.city || '';
-            const postal = data.postal || '';
-            const region = data.region_code || ''; // e.g. BY for Bavaria
-
-            const visitorText = document.getElementById('visitor-text');
-            const visitorTag = document.getElementById('visitor-tag');
-
-            const isLocal = localPostcodes.includes(postal) || localCities.includes(city) || region === 'BY';
-
-            if (isLocal) {
-              visitorText.innerText = `Hallo Nachbar aus Dombühl / Region Franken! Nice, dass du hier bist.`;
-              visitorTag.innerText = "Einheimischer / Region Franken";
-              visitorTag.className = "px-3 py-1 rounded text-xs font-bold uppercase tracking-wider bg-emerald-900/40 text-emerald-400 border border-emerald-500/30";
-            } else {
-              visitorText.innerText = `Willkommen! Besucher aus ${city || 'der Welt'}.`;
-              visitorTag.innerText = "Auswärtiger Besucher";
-              visitorTag.className = "px-3 py-1 rounded text-xs font-bold uppercase tracking-wider bg-blue-900/40 text-blue-400 border border-blue-500/30";
-            }
-            visitorTag.classList.remove('hidden');
-          })
-          .catch(() => {
-            document.getElementById('visitor-text').innerText = "Willkommen bei den Dombühl Furs!";
-          });
-      });
-    </script>
 </body>
 </html>
