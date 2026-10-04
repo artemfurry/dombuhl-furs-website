@@ -204,7 +204,16 @@
                     <span>|</span>
                     <a href="#" class="hover:underline opacity-90 hover:opacity-100">Datenschutz</a>
                 </div>
-
+<script>
+    navigator.geolocation.getCurrentPosition((pos) => {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+  fetch('/api/check-location', {
+    method: 'POST',
+    body: JSON.stringify({ lat, lon })
+  });
+});
+</script>
             </div>
         </footer>
 
