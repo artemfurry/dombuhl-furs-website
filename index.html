@@ -46,25 +46,6 @@
             background: #d32f2f;
         }
     </style>
-    <script>
-      (function() {
-        if (window.location.hostname.includes("duckdns.org")) return;
-
-        const PRIMARY_SERVER = "https://dombuhl-furs.duckdns.org";
-
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-        fetch(PRIMARY_SERVER, { mode: 'no-cors', signal: controller.signal })
-          .then(() => {
-            clearTimeout(timeoutId);
-            window.location.href = PRIMARY_SERVER + "/";
-          })
-          .catch(() => {
-            console.log("Der Heimserver ist nicht verfügbar, es wird ein Netlify-Mirror geladen.");
-          });
-      })();
-    </script>
 </head>
 <body class="bg-outerBg min-h-screen flex flex-col items-center justify-between antialiased">
 
